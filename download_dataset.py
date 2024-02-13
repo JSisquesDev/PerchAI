@@ -34,6 +34,8 @@ def download_dataset(dataset, path):
 
     # Borramos el ZIP descargado
     os.remove(ZIP_PATH)
+    os.remove(os.path.join(path, "EfficientNetB0-525-(224 X 224)- 98.97.h5"))
+    
     print(f'El dataset {dataset} se ha descargado correctamente')
 
 
@@ -41,14 +43,16 @@ def create_kaggle_file(username, key) -> None:
     # Obtenemos la ruta de kaggle
     KAGGLE_PATH = os.path.expanduser(f'~{os.sep}.kaggle')
     
-    # Creamos la carpeta kaggle si no existe
-    os.makedirs(KAGGLE_PATH, exist_ok=True)
+    if not os.path.exists(KAGGLE_PATH):
+        # Creamos la carpeta kaggle si no existe
+        os.makedirs(KAGGLE_PATH, exist_ok=True)
 
     # Obtenemos la ruta para el archivo JSON de Kaggle
     FILE_PATH = os.path.join(KAGGLE_PATH, 'kaggle.json')
+    print(FILE_PATH)
 
     # Guardamos las credenciales en kaggle.json
-    with open(FILE_PATH, 'a+') as json_file:
+    with open(FILE_PATH, 'w') as json_file:
         json.dump({"username": username, "key": key}, json_file)
 
     print(f'Creado el archivo de credenciales de Kaggle en {FILE_PATH}')
@@ -60,13 +64,13 @@ if __name__ == '__main__':
     load_dotenv(find_dotenv())
     print("x")
     
-    USERNAME = os.getenv('KAGGLE_USERNAME')
-    KEY = os.getenv('KAGGLE_API_KEY')
+    KAGGLE_USERNAME = os.getenv('KAGGLE_USERNAME')
+    KAGGLE_KEY = os.getenv('KAGGLE_KEY')
     
-    print(USERNAME)
-    print(KEY)
+    print(KAGGLE_USERNAME)
+    print(KAGGLE_KEY)
     
-    create_kaggle_file(USERNAME, KEY)
+    create_kaggle_file(KAGGLE_USERNAME, KAGGLE_KEY)
     
     # Nombre de los datasets
     DATASET_NAME = os.getenv('DATASET_NAME')

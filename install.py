@@ -7,6 +7,9 @@ os.system("python -m pip install --upgrade pip")
 # Instalamos los requerimientos
 os.system("pip install -r requirements.txt")
 
+# Instalamos las dependencias de npm
+os.system("npm install")
+
 # Guardamos la ruta absoluta del proyecto
 path = os.path.abspath("./")
 env_variables ={}
