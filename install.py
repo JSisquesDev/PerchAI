@@ -1,16 +1,6 @@
 import os
 import shutil
 
-os.system("python -m venv .venv")
-
-if os.name == "nt":
-    # Para los equipos windows
-    command = ".venv/Scripts/Activate.ps1"
-else:
-    command = "source .env/scripts/activate"
-
-os.system(command)
-
 # Actualizamos pip
 os.system("python -m pip install --upgrade pip")
 
