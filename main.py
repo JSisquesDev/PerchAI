@@ -162,6 +162,8 @@ if __name__ == '__main__':
     # Entrenamos el modelo
     result = model.fit(train_data, epochs=EPOCHS, callbacks=[early_stopping, checkpoint], validation_data=validation_data)
     
+    model.save(MODEL_NAME)
+    
     # Obtenemos las estadisticas del modelo
     scores = model.evaluate(train_data, validation_data, verbose=0)
     accuracy = scores[1]*100
